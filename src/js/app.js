@@ -59,7 +59,7 @@ App = {
     })
   },
 
-  render: function() {
+  render: async function() {
     if (App.loading) {
       return;
     }
@@ -106,6 +106,22 @@ App = {
         content.show();
       })
     });
+    // var dappTokenSaleInstance = await App.contracts.DappTokenSale.deployed();
+    // var tokenPrice = await dappTokenSaleInstance.tokenPrice();
+    // App.tokenPrice = tokenPrice;
+    // $('.token-price').html(web3.fromWei(App.tokenPrice, "ether").toNumber());
+    // var tokensSold = await dappTokenSaleInstance.tokensSold();
+    // App.tokensSold = tokensSold.toNumber();
+    // $('.tokens-sold').html(App.tokensSold);
+    // $('.tokens-available').html(App.tokensAvailable);
+    // var progressPercent = (Math.ceil(App.tokensSold) / App.tokensAvailable) * 100;
+    // $('#progress').css('width', progressPercent + '%');
+    // var dappTokenInstance = await App.contracts.DappToken.deployed();
+    // var balance = dappTokenInstance.balanceOf(App.account);
+    // $('.dapp-balance').html(balance.toNumber());
+    // App.loading = false;
+    // loader.hide();
+    // content.show();
   },
 
   buyTokens: function() {
@@ -123,8 +139,27 @@ App = {
       $('form').trigger('reset') // reset number of tokens in form
       // Wait for Sell event
     });
+  },
+
+  getBalance: function() {
+    // $('#content').hide();
+    // $('#loader').show();
+    var address = $('#address').val();
+    App.contracts.DappToken.deployed().then(function(instance) {
+      return instance.balanceOf(address, {
+        from: App.account,
+      });
+    }).then(function(result) {
+      $('.balance').html(result.toNumber());
+      $('#con').show();
+      // console.log("Tokens bought...")
+      // $('form').trigger('reset') // reset number of tokens in form
+      // Wait for Sell event
+    });
   }
 }
+
+
 
 $(function() {
   $(window).load(function() {

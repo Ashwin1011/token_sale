@@ -13,5 +13,11 @@ module.exports = {
       network_id: 4,
       gas: 4700000
     }
+  },
+  compilers: {
+    solc: {
+      version: "^0.8.4", // A version or constraint - Ex. "^0.5.0"
+                         // Can also be set to "native" to use a native solc
+    }
   }
 };

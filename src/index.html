@@ -36,6 +36,22 @@
               </div>
             </div>
           </form>
+          <form onSubmit="App.getBalance(); return false;" role="form">
+            <div class="form-group">
+              <div class="input-group">
+                <input id="address" class="form-control input-lg" type="string">
+                </input>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-primary btn-lg">Get Balance</button>
+                </span>
+            </div>
+          </form>
+          <div id="con" class="text-left" style="display: none;">
+            <p>
+             Balance is <span class="balance"></span> Ether.
+            </p>
+            <br/>
+        </div>
           <br>
            <div class="progress">
               <div id="progress" class="progress-bar progress-bar-striped active" aria-valuemin="0" aria-valuemax="100">
